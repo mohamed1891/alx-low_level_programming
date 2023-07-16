@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 /**
- * main - Main entry point description
+ * main - Main entry point description.
  *
  * Return: Always 1 (Success)
  */
