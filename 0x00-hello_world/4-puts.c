@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 /**
- * main - main description
+ * main - main description.
  * Return: always 0 (success)
  */
 int main(void)
