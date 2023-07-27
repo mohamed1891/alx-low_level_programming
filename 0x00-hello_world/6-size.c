@@ -2,6 +2,7 @@
 
 /**
  * main - Entry point
+ *
  * returns: Always returns 0 (success)
 */
 int main (void)
