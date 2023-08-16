@@ -3,8 +3,8 @@
 
 /**
  * _memset - Entry point.
- * @s: pointer
- * @b: buffer
+ * @s: pointer.
+ * @b: buffer.
  * @n: number of bytes to write.
  * Return: buffer.
  */
