@@ -3,12 +3,11 @@
 #include "function_pointers.h"
 
 /**
- * print_name - print name
+ * print_name - print the name
  * @name: name to print
  * @f: function to use
- *
  * Return: none
- */
+*/
 
 void print_name(char *name, void (*f)(char *))
 {
