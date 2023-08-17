@@ -1,82 +1,88 @@
 #include "variadic_functions.h"
 
 /**
- * print_char - Prints a char
- * @ap: Argument pointer
+ * print_f - print float
+ * @vprint: the float
  */
-void print_char(va_list ap)
+
+void print_f(va_list vprint)
 {
-	printf("%c", va_arg(ap, int));
+	printf("%f", va_arg(vprint, double));
 }
 
 /**
- * print_integer - Prints an integer
- * @ap: Argument pointer
+ * printc - print char
+ * @vprint: the char
  */
-void print_integer(va_list ap)
+
+void printc(va_list vprint)
 {
-	printf("%d", va_arg(ap, int));
+	printf("%c", va_arg(vprint, int));
 }
 
 /**
- * print_float - Prints a float
- * @ap: Argument pointer
+ * printi - print int
+ * @vprint: the integer
  */
-void print_float(va_list ap)
+
+void printi(va_list vprint)
 {
-	printf("%f", va_arg(ap, double));
+	printf("%d", va_arg(vprint, int));
 }
 
 /**
- * print_string - Prints a string
- * @ap: Argument pointer
+ * prints - print string
+ * @vprint: the string
  */
-void print_string(va_list ap)
-{
-	char *s = va_arg(ap, char *);
 
-	if (!s)
+void prints(va_list vprint)
+{
+	char *s;
+
+	s = va_arg(vprint, char *);
+	if (s == NULL)
 	{
 		printf("(nil)");
 		return;
 	}
-		printf("%s", s);
+	printf("%s", s);
 }
 
 /**
- * print_all - Prints anything
- * @format: Types of arguments passed to function
+ * print_all - print everything
+ * @format: type to print
+ * Return: none
  */
+
 void print_all(const char * const format, ...)
 {
-	print_type types[] = {
-		{"c", print_char},
-		{"i", print_integer},
-		{"f", print_float},
-		{"s", print_string},
-		{NULL, NULL}
-	};
-	va_list ap;
+	int i, j;
 	char *separator = "";
-	int i = 0;
-	int j = 0;
+	va_list vprint;
 
-	va_start(ap, format);
-	while (format && format[i])
+	types opt[] = { {'c', printc},
+			      {'i', printi},
+			      {'f', print_f},
+			      {'s', prints},
+			      {'\0', NULL} };
+
+	va_start(vprint, format);
+	i = 0;
+	while (format != NULL && format[i] != '\0')
 	{
-		while (types[j].type)
+		j = 0;
+		while (opt[j].c != '\0')
 		{
-			if (*types[j].type == format[i])
+			if (opt[j].c == format[i])
 			{
 				printf("%s", separator);
-				types[j].f(ap);
+				opt[j].f(vprint);
 				separator = ", ";
 			}
-			++j;
+			j++;
 		}
-		j = 0;
-		++i;
+		i++;
 	}
+	va_end(vprint);
 	printf("\n");
-	va_end(ap);
 }
