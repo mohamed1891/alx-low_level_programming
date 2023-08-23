@@ -8,22 +8,19 @@
 
 void rev_string(char *s)
 {
-	char *tmp = s, *cpy = s, *newM;
-	int cnt = 0, dec, ind;
+	int len, i, half;
+	char temp;
 
-	while (*tmp)
+	for (len = 0; s[len] != '\0'; len++)
+	;
+	i = 0;
+	half = len / 2;
+
+	while (half--)
 	{
-		cnt++;
-		tmp++;
+		temp = s[len - i - 1];
+		s[len - i - 1] = s[i];
+		s[i] = temp;
+		i++;
 	}
-
-	newM = malloc((cnt - 1) * sizeof(char));
-	if (newM == NULL)
-		s = "";
-
-	for (ind = 0, dec = cnt - 1; dec >= 0; dec--, ind++)
-		newM[ind] = cpy[dec];
-
-	for (ind = 0; ind < cnt; ind++)
-		s[ind] = newM[ind];
 }
