@@ -10,7 +10,7 @@
 
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	ssize_t Op, bytesRead, bytesWritten;
+	ssize_t Op, b_Read, b_Written;
 	char *buffer;
 
 	if (filename == NULL)
@@ -21,10 +21,11 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		return (0);
 
 	Op = open(filename, O_RDONLY);
-	bytesRead = read(Op, buffer, letters);
-	bytesWritten = write(STDOUT_FILENO, buffer, bytesRead);
+	b_Read = read(Op, buffer, letters);
+	b_Written = write(STDOUT_FILENO, buffer, b_Read);
 
-	if (Op == -1 || bytesRead == -1 || bytesWritten == -1 || bytesWritten != bytesRead)
+	if (Op == -1 || b_Read == -1 || b_Written == -1 || b_Written != b_Read)
+
 	{
 		free(buffer);
 		return (0);
@@ -33,5 +34,5 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	free(buffer);
 	close(Op);
 
-	return (bytesWritten);
+	return (b_Written);
 }
