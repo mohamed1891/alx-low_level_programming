@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Defines an island perimeter measuring function."""
 
+
 def island_perimeter(grid):
     """Return the perimeter of an island.
 
@@ -11,19 +12,19 @@ def island_perimeter(grid):
     Returns:
         The perimeter of the island defined in grid.
     """
-    perimeter = 0
+    height = len(grid)
+    width = len(grid[0]) if height > 0 else 0  # Check if the grid is not empty
+    edges = 0
+    size = 0
 
-    for i in range(len(grid)):
-        for j in range(len(grid[0])):
+    for i in range(height):
+        for j in range(width):
             if grid[i][j] == 1:
-                perimeter += 4  # Every land cell contributes 4 sides to the perimeter
-
-                # Check left neighbor
+                size += 1
                 if j > 0 and grid[i][j - 1] == 1:
-                    perimeter -= 2  # Subtract 2 if the left neighbor is land
-
-                # Check top neighbor
+                    edges += 1
                 if i > 0 and grid[i - 1][j] == 1:
-                    perimeter -= 2  # Subtract 2 if the top neighbor is land
+                    edges += 1
 
-    return perimeter
+    return size * 4 - edges * 2
+
