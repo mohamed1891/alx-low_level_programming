@@ -27,4 +27,3 @@ def island_perimeter(grid):
                     perimeter -= 2  # Subtract 2 if the top neighbor is land
 
     return perimeter
-
