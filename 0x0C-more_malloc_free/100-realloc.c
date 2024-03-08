@@ -1,48 +1,58 @@
 #include "main.h"
 #include <stdlib.h>
+#include <string.h>
 
 /**
- * _realloc - reallocates a memory block using malloc and free
+ * _realloc - Reallocates a memory block using malloc and free.
+ * @ptr: A pointer to the memory previously allocated.
+ * @old_size: The size in bytes of the allocated space for ptr.
+ * @new_size: The size in bytes for the new memory block.
  *
- * @ptr: pointer to the memory previously allocated with malloc(old_size)
- * @old_size: size, in bytes, of the allocated space for ptr
- * @new_size: new size, in bytes, of the new memory block
- *
- * Return: pointer to the reallocated memory block, or NULL on failure
+ * Return: If new_size == old_size - ptr.
+ *         If new_size == 0 and ptr is not NULL - NULL.
+ *         Otherwise - a pointer to the reallocated memory block.
  */
+
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-    /* declare a pointer of type void */
-    void *new_ptr;
+	void *mem;
+	char *ptr_copy;
 
-    /* allocate a new memory block using malloc */
-    new_ptr = malloc(new_size);
+	/**
+	 * If the new size is the same as the old size, free the original pointer
+	 * and allocate a new block of memory with the requested size.
+	 */
+	if (new_size == old_size)
+	{
+		free(ptr);
+		return (malloc(new_size));
+	}
 
-    /* check if malloc failed */
-    if (new_ptr == NULL)
-        return NULL;
+	/* If the original pointer is NULL, simply allocate a new block of memory. */
+	if (ptr == NULL)
+		return (malloc(new_size));
 
-    /* check if new size is zero and old pointer is not NULL */
-    if (new_size == 0 && ptr != NULL)
-    {
-        free(ptr);
-        return NULL;
-    }
+	/* If the new size is 0, free the original pointer and return NULL. */
+	if (new_size == 0)
+	{
+		free(ptr);
+		return (NULL);
+	}
 
-    /* check if old pointer is NULL */
-    if (ptr == NULL)
-        return new_ptr; /* return the new pointer */
+	/* Allocate a new block of memory with the requested size. */
+	if (mam == NULL)
+	{
+		free(ptr);
+		return (NULL);
+	}
 
-    /* copy the contents of the old memory block to the new memory block */
-    for (unsigned int i = 0; i < (old_size < new_size ? old_size : new_size); i++)
-    {
-        /* use a casted pointer of type char to access each byte */
-        ((char *)new_ptr)[i] = ((char *)ptr)[i];
-    }
+	/* Copy the contents from the old block to the new block using memcpy. */
+	ptr_copy = ptr;
+	memcpy(mem, ptr_copy, (old_size < new_size) ? old_size : new_size);
 
-    /* free the old pointer */
-    free(ptr);
+	/* Free the original pointer. */
+	free(ptr);
 
-    /* return the new pointer */
-    return new_ptr;
+	/* Return the pointer to the newly created or reallocated memory block. */
+	return (mem);
 }
