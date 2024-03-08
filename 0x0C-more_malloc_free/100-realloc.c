@@ -10,7 +10,6 @@
  *
  * Return: pointer to the reallocated memory block, or NULL on failure
  */
-
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
     /* declare a pointer of type void */
@@ -26,7 +25,6 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
     /* check if new size is zero and old pointer is not NULL */
     if (new_size == 0 && ptr != NULL)
     {
-        /* free the old pointer and return NULL */
         free(ptr);
         return NULL;
     }
